@@ -1,6 +1,28 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import Link from 'next/link';
+import Date from '../components/date';
+import Image from 'next/image';
+import { getSortedPostsData } from '../lib/posts';
+import utilStyles from '../styles/utils.module.scss';
 
-export default function Home() {
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData
+    }
+  };
+}
+
+// export async function getServerSideProps(context) {
+//   return {
+//     props: {
+//       // props for your component
+//     }
+//   }
+// }
+
+export default function Home({ allPostsData }) {
   return (
     <div className="container">
       <Head>
@@ -10,12 +32,22 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Read{' '}
+          <Link href="/posts/first-post">
+            <a>this page!</a>
+          </Link>
         </h1>
+        <Image
+          src="/images/bitcoin.jpeg" // Route of the image file
+          height={200} // Desired size with correct aspect ratio
+          width={200} // Desired size with correct aspect ratio
+          alt="bitcoin"
+        />
 
         <p className="description">
           Get started by editing <code>pages/index.js</code>
         </p>
+        <Link href="/profile/index">Personal profile</Link>
 
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
@@ -46,6 +78,22 @@ export default function Home() {
             </p>
           </a>
         </div>
+        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+          <h2 className={utilStyles.headingLg}>Blog</h2>
+          <ul className={utilStyles.list}>
+            {allPostsData.map(({ id, date, title }) => (
+              <li className={utilStyles.listItem} key={id}>
+                <Link href={`/posts/${id}`}>
+                  <a>{title}</a>
+                </Link>
+                <br />
+                <small className={utilStyles.lightText}>
+                  <Date dateString={date} />
+                </small>
+              </li>
+            ))}
+          </ul>
+        </section>
       </main>
 
       <footer>
@@ -205,5 +253,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }
