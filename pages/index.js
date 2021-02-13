@@ -103,7 +103,7 @@ export default function Home({ allPostsData }) {
           rel="noopener noreferrer"
         >
           Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" style={{width: '100', height: '100'}} />
+          <img src="/vercel.svg" alt="Vercel Logo" className="logo" style={{width: '100px', height: '100px'}} />
         </a>
       </footer>
 
