@@ -30,8 +30,8 @@ export default function Layout({ children, home }) {
               priority
               src="/images/bitcoin.jpeg"
               className={utilStyles.borderCircle}
-              height={144}
-              width={144}
+              height={192}
+              width={256}
               alt={name}
             />
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
@@ -44,8 +44,8 @@ export default function Layout({ children, home }) {
                   priority
                   src="/images/bitcoin.jpeg"
                   className={utilStyles.borderCircle}
-                  height={108}
-                  width={108}
+                  height={192}
+                  width={256}
                   alt={name}
                 />
               </a>
